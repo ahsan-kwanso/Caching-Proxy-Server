@@ -9,11 +9,9 @@ export class ProxyController {
   @Get('*')
   async handleRequest(@Req() req: Request, @Res() res: Response) {
     try {
-      console.log('req.url', req.url);
       const { data, headers, cached } = await this.proxyService.forwardRequest(
         req.url,
       );
-      console.log('data', data);
       // Set response headers
       Object.entries(headers).forEach(([key, value]) => {
         res.setHeader(key, value);
